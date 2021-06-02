@@ -16,20 +16,15 @@ Seniors = df[df['Grade'].str.contains("Senior")]
 goodSeniors = Seniors[Seniors['Good Standing'].str.contains("Yes")]
 ratioSeniors = len(goodSeniors)/len(Seniors)
 SeniorsPointTotal = Seniors['Points Goal']
-#print(ratioSeniors)
 
-#Ratio of Active Juniors to All Sophomores
 Juniors = df[df['Grade'].str.contains("Junior")]
 goodJuniors = Juniors[Juniors['Good Standing'].str.contains("Yes")]
 ratioJuniors = len(goodJuniors)/len(Juniors)
-#print(ratioJuniors)
 
-#Ratio of Active Sophomores to All Sophomores
 Sophomores = df[df['Grade'].str.contains("Sophomore")]
 goodSophomores = Sophomores[Sophomores['Good Standing'].str.contains("Yes")]
 ratioSophomores= len(goodSophomores)/len(Sophomores)
 
-#Graph Points Across Active Members of Each Grade
 result = pd.concat([goodJuniors, goodSophomores, goodSeniors], axis=0)
 x = result.boxplot(by="Grade",column=["Points Goal"], grid=False)
 x.set_ylabel("Average Participation Points of Brothers")
@@ -41,20 +36,13 @@ oneWayAnova = f_oneway(smPointsToList,jPointsToList,srPointsToList )
 #normality = stats.shapiro(result.resid)
 #p > 0.05, Significant Difference in Means
 print("ANOVA ONE WAY:" + str(oneWayAnova))
-print("=====================================================================")
-print("RATIO OF GOOD STANDING SOPHOMORES TO ALL SOPHOMORES: " + str(ratioSophomores))
-print("RATIO OF GOOD STANDING JUNIORS TO ALL JUNIORS: " + str(ratioJuniors))
-print("RATIO OF GOOD STANDING SENIORS TO ALL SENIORS: " + str(ratioSeniors))
 
-#print(TuesdayEvent)
 #Days Of the Week / # of Participants Across Multiple Semesters
 SundayEvent = df[df['DOW Event'].str.contains("Sunday")]
 df["Points Earned"] = df["Points Earned"].astype(str)
 df = df[~df["Points Earned"].str.contains("0")]
 df = df[~df["Event"].str.contains("Chapter")]
-#print(df)
-#Event Participation Per Week
-   
+
 SundayEvent = df[df['DOW Event'].str.contains("Sunday")]
 MondayEvent = df[df['DOW Event'].str.contains("Monday")]
 TuesdayEvent = df[df['DOW Event'].str.contains("Tuesday")]
@@ -73,5 +61,4 @@ ax.set_xlabel("Day of week")
 ax.set_ylabel("# of Event Participants")
 
 #df = pd.DataFrame({'lab':['A', 'B', 'C'], 'val':[10, 30, 20]})
-#Massive Increase in Turnout on Tuesdays (Across multiple semesters) on Tues, Fri on average
-#Filtered Chapter Out of Tuesdays
+
